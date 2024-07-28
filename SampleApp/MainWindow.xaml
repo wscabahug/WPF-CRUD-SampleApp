@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SampleApp"
         mc:Ignorable="d"
-        Title="Sample CRUD App" Height="450" Width="800">
-    <Grid>
-
+        xmlns:views="clr-namespace:SampleApp.Views"
+        Title="Sample CRUD App"
+        Height="450"
+        Width="800"
+        FontSize="14">
+    <Grid Margin="25">
+        <views:UsersView />
     </Grid>
 </Window>
