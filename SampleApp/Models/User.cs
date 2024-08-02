@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SampleApp.Models
 {
-    class User
+    public class User
     {
         public string Username { get; }
         public bool IsRegular { get; }

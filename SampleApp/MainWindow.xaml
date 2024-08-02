@@ -6,11 +6,17 @@
         xmlns:local="clr-namespace:SampleApp"
         mc:Ignorable="d"
         xmlns:views="clr-namespace:SampleApp.Views"
+        xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
         Title="Sample CRUD App"
         Height="450"
         Width="800"
         FontSize="14">
-    <Grid Margin="25">
-        <views:UsersView />
-    </Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
+                <ContentControl Margin="50 25" Content="{Binding CurrentModalViewModel}"/>
+            </modalcontrol:Modal>
+            <views:UsersView Margin="25" DataContext="{Binding UsersViewModel}" />
+        </Grid>
+    </ScrollViewer>
 </Window>

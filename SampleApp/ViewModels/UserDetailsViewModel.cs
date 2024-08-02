@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SampleApp.ViewModels
 {
-    class UserDetailsViewModel : ViewModelBase
+    public class UserDetailsViewModel : ViewModelBase
     {
         private readonly SelectedUserStore selectedUserStore;
 

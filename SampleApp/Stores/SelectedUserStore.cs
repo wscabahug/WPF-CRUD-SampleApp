@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SampleApp.Stores
 {
-    class SelectedUserStore
+    public class SelectedUserStore
     {
         private User user;
         public User SelectedUser

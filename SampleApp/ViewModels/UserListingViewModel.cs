@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SampleApp.ViewModels
 {
-    class UserListingViewModel : ViewModelBase
+    public class UserListingViewModel : ViewModelBase
     {
         private readonly ObservableCollection<UserListingItemViewModel> userListingItemViewModels;
         private readonly SelectedUserStore selectedUserStore;

@@ -11,17 +11,20 @@ namespace SampleApp
     /// </summary>
     public partial class App : Application
     {
+        private readonly ModalNavigationStore modalNavigationStore;
         private readonly SelectedUserStore selectedUserStore;
 
         public App()
         {
+            modalNavigationStore = new ModalNavigationStore();
             selectedUserStore = new SelectedUserStore();
         }
         protected override void OnStartup(StartupEventArgs e)
         {
+            UsersViewModel usersViewModel = new UsersViewModel(selectedUserStore);
             MainWindow = new MainWindow()
             {
-                DataContext = new UsersViewModel(selectedUserStore)
+                DataContext = new MainViewModel(modalNavigationStore, usersViewModel)
             };
             MainWindow.Show();
             base.OnStartup(e);
