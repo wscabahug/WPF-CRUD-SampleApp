@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace SampleApp.ViewModels
 {
-    class UserListingItemViewModel : ViewModelBase
+    public class UserListingItemViewModel : ViewModelBase
     {
         public User User { get; }
 
