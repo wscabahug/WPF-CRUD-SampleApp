@@ -21,7 +21,7 @@ namespace SampleApp
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            UsersViewModel usersViewModel = new UsersViewModel(selectedUserStore);
+            UsersViewModel usersViewModel = new UsersViewModel(selectedUserStore, modalNavigationStore);
             MainWindow = new MainWindow()
             {
                 DataContext = new MainViewModel(modalNavigationStore, usersViewModel)

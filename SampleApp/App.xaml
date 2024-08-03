@@ -7,7 +7,7 @@
             <SolidColorBrush x:Key="BorderPrimary" Color="#1c1c1c"/>
 
             <Style TargetType="TextBlock" x:Key="PageHeader">
-                <Setter Property="FontFamily" Value="32"/>
+                <Setter Property="FontSize" Value="32"/>
             </Style>
 
             <Style TargetType="Button">
