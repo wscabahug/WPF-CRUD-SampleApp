@@ -1,4 +1,5 @@
-﻿using SampleApp.Stores;
+﻿using SampleApp.Commands;
+using SampleApp.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,12 @@ namespace SampleApp.ViewModels
 
         public ICommand AddUsersCommand { get; }
 
-        public UsersViewModel(SelectedUserStore selectedUserStore)
+        public UsersViewModel(SelectedUserStore selectedUserStore, ModalNavigationStore modalNavigationStore)
         {
-            UserListingViewModel = new UserListingViewModel(selectedUserStore);
+            UserListingViewModel = new UserListingViewModel(selectedUserStore, modalNavigationStore);
             UserDetailsViewModel = new UserDetailsViewModel(selectedUserStore);
+
+            AddUsersCommand = new OpenAddUserCommand(modalNavigationStore);
         }
     }
 }

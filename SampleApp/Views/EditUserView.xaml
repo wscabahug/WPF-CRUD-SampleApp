@@ -18,6 +18,6 @@
             Style="{StaticResource PageHeader}"
             Text="Edit User"/>
 
-        <components:UserDetailsForm Grid.Row="1" Margin="0 30 0 0"/>
+        <components:UserDetailsForm Grid.Row="1" Margin="0 30 0 0" DataContext="{Binding UserDetailsFormViewModel}"/>
     </Grid>
 </UserControl>

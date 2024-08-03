@@ -40,6 +40,7 @@ namespace SampleApp.ViewModels
         }
 
         private bool isEnrolled;
+
         public bool IsEnrolled
         {
             get
@@ -58,5 +59,11 @@ namespace SampleApp.ViewModels
         public ICommand SubmitCommand { get; }
 
         public ICommand CancelCommand { get; }
+
+        public UserDetailsFormViewModel(ICommand submitCommand, ICommand cancelCommand)
+        {
+            SubmitCommand = submitCommand;
+            CancelCommand = cancelCommand;
+        }
     }
 }

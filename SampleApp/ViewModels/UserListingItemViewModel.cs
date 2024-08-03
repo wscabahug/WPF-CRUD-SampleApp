@@ -16,8 +16,9 @@ namespace SampleApp.ViewModels
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
 
-        public UserListingItemViewModel(User user)
+        public UserListingItemViewModel(User user, ICommand editCommand)
         {
+            EditCommand = editCommand;
             User = user;
         }
     }

@@ -1,4 +1,5 @@
-﻿using SampleApp.Models;
+﻿using SampleApp.Commands;
+using SampleApp.Models;
 using SampleApp.Stores;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SampleApp.ViewModels
 {
@@ -32,14 +34,20 @@ namespace SampleApp.ViewModels
             }
         }
 
-        public UserListingViewModel(SelectedUserStore selectedUserStore)
+        public UserListingViewModel(SelectedUserStore selectedUserStore, ModalNavigationStore modalNavigationStore)
         {
             userListingItemViewModels = new ObservableCollection<UserListingItemViewModel>();
 
-            userListingItemViewModels.Add(new UserListingItemViewModel(new User("UserA", true, false)));
-            userListingItemViewModels.Add(new UserListingItemViewModel(new User("UserB", false, true)));
-            userListingItemViewModels.Add(new UserListingItemViewModel(new User("UserC", true, true)));
+            AddUser(new User("UserA", true, false), modalNavigationStore);
+            AddUser(new User("UserB", false, true), modalNavigationStore);
+            AddUser(new User("UserC", true, true), modalNavigationStore);
             this.selectedUserStore = selectedUserStore;
+        }
+
+        private void AddUser(User user, ModalNavigationStore modalNavigationStore)
+        {
+            ICommand editCommand = new OpenEditUserCommand(user, modalNavigationStore);
+            userListingItemViewModels.Add(new UserListingItemViewModel(user, editCommand));
         }
     }
 }

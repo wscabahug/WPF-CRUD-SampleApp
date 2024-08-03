@@ -11,26 +11,15 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0" Grid.IsSharedSizeScope="True">
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding HasSelectedUser}" Value="True">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid
-                Grid.Row="0">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" SharedSizeGroup="Label" />
                     <ColumnDefinition Width="*" MaxWidth="250"/>
@@ -42,14 +31,12 @@
                     Text="Username" />
                 <TextBox
                     Grid.Column="1"
-                    Text="{Binding Username}"
+                    Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                     Margin="20 0 0 0">
                 </TextBox>
             </Grid>
 
-            <Grid
-                Grid.Row="1"
-                Margin="0 20 0 0">
+            <Grid Grid.Row="1" Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" SharedSizeGroup="Label" />
                     <ColumnDefinition Width="auto"/>
@@ -66,9 +53,7 @@
                     Margin="20 0 0 0"/>
             </Grid>
 
-            <Grid
-                Grid.Row="2"
-                Margin="0 20 0 0">
+            <Grid Grid.Row="2" Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" SharedSizeGroup="Label" />
                     <ColumnDefinition Width="auto" />
@@ -86,7 +71,7 @@
             </Grid>
         </Grid>
 
-        <WrapPanel Grid.Row="1" Margin="0 0 30 0">
+        <WrapPanel Grid.Row="1" Margin="0 30 0 0">
             <Button Content="Submit" Command="{Binding SubmitCommand}" IsEnabled="{Binding CanSubmit}" Margin="0 0 20 0"/>
             <Button Content="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource ButtonSecondary}" Margin="0 0 20 0"/>
         </WrapPanel>
