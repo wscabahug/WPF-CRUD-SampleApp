@@ -11,18 +11,22 @@ namespace SampleApp.Commands
 {
     public class OpenEditUserCommand : CommandBase
     {
-        private readonly User user;
+        private readonly UserListingItemViewModel userListingItemViewModel;
+        private readonly UserStore userStore;
         private readonly ModalNavigationStore modalNavigationStore;
 
-        public OpenEditUserCommand(User user, ModalNavigationStore modalNavigationStore)
+        public OpenEditUserCommand(UserListingItemViewModel userListingItemViewModel, UserStore userStore, ModalNavigationStore modalNavigationStore)
         {
-            this.user = user;
+            this.userListingItemViewModel = userListingItemViewModel;
+            this.userStore = userStore;
             this.modalNavigationStore = modalNavigationStore;
         }
 
         public override void Execute(object parameter)
         {
-            EditUserViewModel editUserViewModel = new EditUserViewModel(user, modalNavigationStore);
+            User user = userListingItemViewModel.User;
+
+            EditUserViewModel editUserViewModel = new EditUserViewModel(user, userStore, modalNavigationStore);
             modalNavigationStore.CurrentViewModel = editUserViewModel;
         }
     }

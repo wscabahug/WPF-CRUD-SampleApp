@@ -13,8 +13,10 @@ namespace SampleApp.ViewModels
 {
     public class UserListingViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<UserListingItemViewModel> userListingItemViewModels;
+        private readonly UserStore userStore;
         private readonly SelectedUserStore selectedUserStore;
+        private readonly ModalNavigationStore modalNavigationStore;
+        private readonly ObservableCollection<UserListingItemViewModel> userListingItemViewModels;
 
         public IEnumerable<UserListingItemViewModel> UserListingItemViewModels => userListingItemViewModels;
 
@@ -34,20 +36,43 @@ namespace SampleApp.ViewModels
             }
         }
 
-        public UserListingViewModel(SelectedUserStore selectedUserStore, ModalNavigationStore modalNavigationStore)
+        public UserListingViewModel(UserStore userStore, SelectedUserStore selectedUserStore, ModalNavigationStore modalNavigationStore)
         {
+            this.userStore = userStore;
+            this.selectedUserStore = selectedUserStore;
+            this.modalNavigationStore = modalNavigationStore;
             userListingItemViewModels = new ObservableCollection<UserListingItemViewModel>();
 
-            AddUser(new User("UserA", true, false), modalNavigationStore);
-            AddUser(new User("UserB", false, true), modalNavigationStore);
-            AddUser(new User("UserC", true, true), modalNavigationStore);
-            this.selectedUserStore = selectedUserStore;
+            this.userStore.UserAdded += UserStore_UserAdded;
+            this.userStore.UserEdited += UserStore_UserEdited;
         }
 
-        private void AddUser(User user, ModalNavigationStore modalNavigationStore)
+        protected override void Dispose()
         {
-            ICommand editCommand = new OpenEditUserCommand(user, modalNavigationStore);
-            userListingItemViewModels.Add(new UserListingItemViewModel(user, editCommand));
+            userStore.UserAdded -= UserStore_UserAdded;
+            userStore.UserEdited -= UserStore_UserEdited;
+            base.Dispose();
+        }
+
+        private void UserStore_UserAdded(User user)
+        {
+            AddUser(user);
+        }
+
+        private void UserStore_UserEdited(User user)
+        {
+            UserListingItemViewModel userListingItemViewModel = userListingItemViewModels.FirstOrDefault(x => x.User.Id == user.Id);
+
+            if (userListingItemViewModel != null)
+            {
+                userListingItemViewModel.Update(user);
+            }
+        }
+
+        private void AddUser(User user)
+        {
+            UserListingItemViewModel itemViewModel = new UserListingItemViewModel(user, userStore, modalNavigationStore);
+            userListingItemViewModels.Add(itemViewModel);
         }
     }
 }

@@ -12,11 +12,14 @@ namespace SampleApp.ViewModels
 {
     public class EditUserViewModel : ViewModelBase
     {
+        public Guid UserId { get; }
         public UserDetailsFormViewModel UserDetailsFormViewModel { get; }
 
-        public EditUserViewModel(User user, ModalNavigationStore modalNavigationStore)
+        public EditUserViewModel(User user, UserStore userStore, ModalNavigationStore modalNavigationStore)
         {
-            ICommand submitCommand = new SubmitEditUserCommand(modalNavigationStore);
+            UserId = user.Id;
+
+            ICommand submitCommand = new SubmitEditUserCommand(this, userStore, modalNavigationStore);
             ICommand cancelCommand = new CloseModalCommand(modalNavigationStore);
             UserDetailsFormViewModel = new UserDetailsFormViewModel(submitCommand, cancelCommand)
             {

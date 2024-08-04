@@ -16,12 +16,12 @@ namespace SampleApp.ViewModels
 
         public ICommand AddUsersCommand { get; }
 
-        public UsersViewModel(SelectedUserStore selectedUserStore, ModalNavigationStore modalNavigationStore)
+        public UsersViewModel(UserStore userStore, SelectedUserStore selectedUserStore, ModalNavigationStore modalNavigationStore)
         {
-            UserListingViewModel = new UserListingViewModel(selectedUserStore, modalNavigationStore);
+            UserListingViewModel = new UserListingViewModel(userStore, selectedUserStore, modalNavigationStore);
             UserDetailsViewModel = new UserDetailsViewModel(selectedUserStore);
 
-            AddUsersCommand = new OpenAddUserCommand(modalNavigationStore);
+            AddUsersCommand = new OpenAddUserCommand(userStore, modalNavigationStore);
         }
     }
 }

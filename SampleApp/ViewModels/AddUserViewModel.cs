@@ -13,9 +13,9 @@ namespace SampleApp.ViewModels
     {
         public UserDetailsFormViewModel UserDetailsFormViewModel { get; }
 
-        public AddUserViewModel(ModalNavigationStore modalNavigationStore)
+        public AddUserViewModel(UserStore userStore, ModalNavigationStore modalNavigationStore)
         {
-            ICommand submitCommand = new SubmitAddUserCommand(modalNavigationStore);
+            ICommand submitCommand = new SubmitAddUserCommand(this, userStore, modalNavigationStore);
             ICommand cancelCommand = new CloseModalCommand(modalNavigationStore);
             UserDetailsFormViewModel = new UserDetailsFormViewModel(submitCommand, cancelCommand);
         }
