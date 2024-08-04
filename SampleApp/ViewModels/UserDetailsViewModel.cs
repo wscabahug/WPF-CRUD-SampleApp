@@ -27,7 +27,7 @@ namespace SampleApp.ViewModels
 
         protected override void Dispose()
         {
-            this.selectedUserStore.SelectedUserChanged -= SelectedUserStore_SelectedUserChanged;
+            selectedUserStore.SelectedUserChanged -= SelectedUserStore_SelectedUserChanged;
 
             base.Dispose();
         }
