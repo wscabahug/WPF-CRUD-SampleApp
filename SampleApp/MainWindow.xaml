@@ -5,12 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SampleApp"
         mc:Ignorable="d"
+        xmlns:viewmodels="clr-namespace:SampleApp.ViewModels"
         xmlns:views="clr-namespace:SampleApp.Views"
+        xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
         Title="Sample CRUD App"
         Height="450"
         Width="800"
         FontSize="14">
-    <Grid Margin="25">
-        <views:UsersView />
-    </Grid>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:AddUserViewModel}">
+            <views:AddUserView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:EditUserViewModel}">
+            <views:EditUserView/>
+        </DataTemplate>
+    </Window.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
+                <ContentControl Margin="50 25" Content="{Binding CurrentModalViewModel}"/>
+            </modalcontrol:Modal>
+            <views:UsersView Margin="25" DataContext="{Binding UsersViewModel}" />
+        </Grid>
+    </ScrollViewer>
 </Window>

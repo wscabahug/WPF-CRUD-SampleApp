@@ -20,7 +20,21 @@
                     x:Name="border"
                     Background="White"
                     CornerRadius="5"/>
-                <ListView BorderThickness="0"></ListView>
+                <ListView
+                    BorderThickness="0"
+                    SelectedItem="{Binding SelectedUserListingItemViewModel}"
+                    ItemsSource="{Binding UserListingItemViewModels}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <local:UserListingItem/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
         </Border>
     </Grid>

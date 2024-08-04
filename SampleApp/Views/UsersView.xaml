@@ -21,13 +21,12 @@
 
             <TextBlock
                 Grid.Column="0"
-                FontSize="32"
+                Style="{StaticResource PageHeader}"
                 Text="Users" />
 
             <Button
                 Grid.Column="1"
-                Padding="15 5"
-                VerticalAlignment="Center"
+                Command="{Binding AddUsersCommand}"
                 FontSize="16"
                 Content="Add" />
         </Grid>
@@ -38,9 +37,12 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <components:UserListing Grid.Column="0" />
+            <components:UserListing Grid.Column="0" DataContext="{Binding UserListingViewModel}" />
             
-            <components:UserDetails Grid.Column="1" Margin="20 0 0 0" />
+            <components:UserDetails
+                Grid.Column="1"
+                Margin="20 0 0 0"
+                DataContext="{Binding UserDetailsViewModel}" />
         </Grid>
     </Grid>
 </UserControl>
